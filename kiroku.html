@@ -13,6 +13,7 @@
 
     <button id="login">Googleへログイン</button>
     <button id="add">登録</button>
+    <p id="message"></p>
 
     <script src="https://accounts.google.com/gsi/client"></script>
     
@@ -87,6 +88,24 @@
           console.log("予定作成成功！");
           console.log(data);
         });
+        
+        .then(data => {
+          console.log("予定作成成功！");
+          console.log(data);
+
+          document.getElementById("title").value = "";
+          document.getElementById("date").value = "";
+          document.getElementById("time").value = "";
+
+          const msg = document.getElementById("message");
+          msg.textContent = "登録完了！";
+          msg.style.color = "green";
+
+          setTimeout(() => {
+            msg.textContent = "";
+          }, 2000);
+        })
+                                                      
       });
     </script>
   </body>
