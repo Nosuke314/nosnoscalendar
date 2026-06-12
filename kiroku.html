@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>予定記録</title>
+  </head>
+  <body>
+    <h1>予定登録</h1>
+
+    <input id="title" placeholder="予定名">
+    <input id="date" type="date">
+    <input id="time" type="time">
+
+    <button id="login">Googleへログイン</button>
+    <button id="add">登録</button>
+
+    <script>
+      document.getElementById("login").addEventLisner("click", () => {
+        const title = document.getElementById("title").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+
+        console.log(title);
+        console.log(date);
+        console.log(time);
+
+      });
+    </script>
+  </body>
+</html>
