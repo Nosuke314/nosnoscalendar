@@ -25,7 +25,21 @@
         console.log(title);
         console.log(date);
         console.log(time);
+      });
+      
+      document.getElementById("add").addEventListener("click" , () => {
+        const title = document.getElementById("title").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
 
+        const start = new Date(`${date}T${time}`);
+
+        const end = new Date(start);
+        end.setHours(end.getHours() + 1);
+        
+        console.log(title);
+        console.log(date);
+        console.log(time);
       });
     </script>
     <script src="https://accounts.google.com/gsi/client"></script>
