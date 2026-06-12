@@ -20,14 +20,18 @@
       const CLIENT_ID = "534929212094-2pe5teem7kg60ea0rlo856hh0usog01m.apps.googleusercontent.com";
 
       let tokenClient;
-
+      let accessToken = "";
+      
       window.onload = () => {
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: CLIENT_ID,
           scope: "https://www.googleapis.com/auth/calendar.events",
+
           callback: (response) => {
-            console.log("ログイン成功！")
-            console.log(response);
+            accessToken = response.access_token;
+
+            console.log("ログイン成功！");
+            console.log(accessToken);
           }
         });
       };
@@ -37,6 +41,12 @@
       });
       
       document.getElementById("add").addEventListener("click" , () => {
+
+        if (!accessToken) {
+          alert("先にGoogleへログインしてください");
+          return;
+        }
+        
         const title = document.getElementById("title").value;
         const date = document.getElementById("date").value;
         const time = document.getElementById("time").value;
@@ -50,6 +60,33 @@
         console.log(date);
         console.log(start);
         console.log(end);
+
+        const event = {
+          summary: title,
+          start: {
+            dateTime: start.toISOString()
+          },
+          end: {
+            dateTime: end.toISOString()
+          }
+        };
+
+        fetch(
+          "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(event)
+          }
+        )
+        .then(response => response.json())
+        .then(data => {
+          console.log("予定作成成功！");
+          console.log(data);
+        });
       });
     </script>
   </body>
