@@ -22,7 +22,7 @@
       window.onload = () => {
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: CLIENT_ID,
-          scope: "https://www.googlepis.com/auth/calendar.events",
+          scope: "https://www.googleapis.com/auth/calendar.events",
           callback: (response) => {
             console.log("ログイン成功！")
             console.log(response);
